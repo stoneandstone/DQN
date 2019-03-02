@@ -6,7 +6,6 @@ import xml.etree.ElementTree as ET
 
 import cmath
 import gym
-import traci
 import torch
 from gym import error, spaces
 from gym import utils
@@ -61,6 +60,8 @@ class SumoEnv(gym.Env):       ###It needs to be modified
         self.sumoBinary = " "
         self.projectFile = './project/'    
 
+
+        import traci
         # initialize lane_list and edge_list
         net_tree = ET.parse("./project/ramp.net.xml")
         for lane in net_tree.iter("lane"):
