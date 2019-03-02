@@ -238,4 +238,14 @@ def Core():
                 tgt_net.sync()  #Sync q_eval and q_target
 
 if __name__ == '__main__':
+
+    if 'SUMO_HOME' in os.environ:
+        tools = os.path.join(os.environ['SUMO_HOME'],'tools')
+        sys.path.append(tools)
+    else:
+        sys.exit("please declare environment variable 'SUMO_HOME'")
+
+    import traci
+    from sumolib import checkBinary
+
     Core()
