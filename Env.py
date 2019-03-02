@@ -51,20 +51,13 @@ class SumoEnv(gym.Env):       ###It needs to be modified
 
         # initialize sumo path
         
-        if 'SUMO_HOME' in os.environ:
-            tools = os.path.join(os.environ['SUMO_HOME'],'tools')
-            sys.path.append(tools)
-        else:
-            sys.exit("please declare environment variable 'SUMO_HOME'")
+
 
         self.sumoBinary = " "
-        self.projectFile = './project/'    
+        self.projectFile = './Project/'    
 
-
-        import traci
-        from sumolib import checkBinary
         # initialize lane_list and edge_list
-        net_tree = ET.parse("./project/ramp.net.xml")
+        net_tree = ET.parse("./Project/ramp.net.xml")
         for lane in net_tree.iter("lane"):
             self.lane_list.append(lane.attrib["id"])
             self.lane_length.append(float(lane.attrib["length"]))
@@ -72,7 +65,7 @@ class SumoEnv(gym.Env):       ###It needs to be modified
         self.observation_space = spaces.Box(low= -1, high=100, shape=(3 * len(self.lane_list), 441, 1), dtype=np.float32)
 
         # initialize lanearea_dec_list
-        dec_tree = ET.parse("./project/ramp.add.xml")
+        dec_tree = ET.parse("./Project/ramp.add.xml")
         for lanearea_dec in dec_tree.iter("laneAreaDetector"):
             if lanearea_dec.attrib["freq"] == '60':
                 self.lanearea_dec_list.append(lanearea_dec.attrib["id"])
