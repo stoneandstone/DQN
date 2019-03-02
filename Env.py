@@ -11,7 +11,7 @@ from gym import error, spaces
 from gym import utils
 from gym.utils import seeding
 from collections import deque
-from sumolib import checkBinary
+
 
 #Environment Constants
 STATE_SHAPE = (81, 441, 1)      
@@ -62,6 +62,7 @@ class SumoEnv(gym.Env):       ###It needs to be modified
 
 
         import traci
+        from sumolib import checkBinary
         # initialize lane_list and edge_list
         net_tree = ET.parse("./project/ramp.net.xml")
         for lane in net_tree.iter("lane"):
